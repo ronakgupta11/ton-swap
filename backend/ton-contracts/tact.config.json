@@ -2,34 +2,14 @@
   "$schema": "https://raw.githubusercontent.com/tact-lang/tact/main/src/config/configSchema.json",
   "projects": [
     {
-      "name": "LopOnTon",
-      "path": "contracts/lop_on_ton.tact",
-      "output": "build/LopOnTon",
+      "name": "EscrowFactory",
+      "path": "contracts/factory.tact",
+      "output": "build/EscrowFactory",
       "options": {
-        "debug": false,
-        "external": false
+          "debug": false,
+          "external": false
       },
       "mode": "full"
-    },
-    {
-      "name": "RequesterContract",
-      "path": "contracts/RequesterContract.tact",
-      "output": "build/RequesterContract",
-      "options": {
-        "debug": false,
-        "external": false
-      },
-      "mode": "full"
-    },
-    {
-      "name": "HoldingContract",
-      "path": "contracts/HoldingContract.tact",
-      "output": "build/HoldingContract",
-      "options": {
-        "debug": false,
-        "external": false
-      },
-      "mode": "full"
-    }
+  }
   ]
 }
