@@ -1,7 +1,9 @@
+import Link from "next/link"
+import { ArrowLeft, Wallet, CheckCircle, ExternalLink, ArrowRight } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ArrowLeft, Wallet, CheckCircle, ExternalLink, ArrowRight } from "lucide-react"
-import Link from "next/link"
+import { ConnectButton, TonConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function ConnectWalletPage() {
   return (
@@ -64,13 +66,11 @@ export default function ConnectWalletPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold">Ethereum Wallet</h3>
-                    <p className="text-sm text-muted-foreground">Connect MetaMask or WalletConnect</p>
+                    <p className="text-sm text-muted-foreground">Connect Wallet to start</p>
                   </div>
                 </div>
-                <Button className="gradient-primary text-primary-foreground hover:opacity-90">
-                  <Wallet className="w-4 h-4 mr-2" />
-                  Connect
-                </Button>
+                <Wallet className="w-4 h-4 mr-2" />
+                <ConnectButton />
               </div>
             </Card>
 
@@ -86,10 +86,8 @@ export default function ConnectWalletPage() {
                     <p className="text-sm text-muted-foreground">Connect TON Wallet or Tonkeeper</p>
                   </div>
                 </div>
-                <Button variant="outline" className="border-border hover:bg-accent bg-transparent">
                   <Wallet className="w-4 h-4 mr-2" />
-                  Connect
-                </Button>
+                  <TonConnectButton />
               </div>
             </Card>
           </div>
