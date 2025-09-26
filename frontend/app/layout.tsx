@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Providers } from '@/components/providers'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { Analytics } from '@vercel/analytics/next'
@@ -17,8 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        {children}
+      <body className={`dark font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+        <Providers>
+          {children}
+        </Providers>
         <Analytics />
       </body>
     </html>
