@@ -1,14 +1,14 @@
 import { Address, beginCell, toNano, SendMode } from '@ton/core';
 import { TonClient, WalletContractV5R1, internal } from '@ton/ton';
 import { mnemonicToPrivateKey } from '@ton/crypto';
-import { CellJMPIEscrow } from '../../build/CellJMPI/CellJMPI_CellJMPIEscrow';
+import { Escrow } from '../../build/EscrowFactory/EscrowFactory_Escrow';
 import { keccak256 } from 'js-sha3';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
 
 async function main() {
-    console.log('CellJMPI Escrow Withdrawal Script\n');
+    console.log(' Escrow Withdrawal Script\n');
 
     // Configuration - Replace these values
     const ESCROW_ADDRESS = 'EQCUFpjbvqgIWWN-B15bCGu1zQU15eWA-MmtCqUMhDWdDdHj';
@@ -56,7 +56,7 @@ async function main() {
     }
 
     const escrowAddress = Address.parse(ESCROW_ADDRESS);
-    const escrow = client.open(CellJMPIEscrow.fromAddress(escrowAddress));
+    const escrow = client.open(Escrow.fromAddress(escrowAddress));
 
     console.log('Escrow Address:', escrowAddress.toString());
     console.log('Secret (bytes):', secretBytes);

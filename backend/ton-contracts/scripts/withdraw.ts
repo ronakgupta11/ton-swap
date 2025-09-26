@@ -25,7 +25,7 @@ function getTimeLockStateValueJS(state: bigint, stage: number): bigint {
 }
 
 export async function run(provider: NetworkProvider) {
-    console.log('🔓 Withdrawing from CellJMPI Escrow...\n');
+    console.log('🔓 Withdrawing from  Escrow...\n');
 
     // Configuration - Replace these values
     const ESCROW_ADDRESS = 'EQC3-Rzjk37FmRgfjHyQOeFjzDJ4QwGsVlqzrJk6gA4DWVXB'; // Replace with your escrow address

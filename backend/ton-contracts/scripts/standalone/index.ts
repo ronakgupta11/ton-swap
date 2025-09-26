@@ -1,8 +1,8 @@
 import { Address, beginCell, toNano, Cell, SendMode } from '@ton/core';
 import { TonClient, WalletContractV5R1, internal } from '@ton/ton';
 import { mnemonicToPrivateKey } from '@ton/crypto';
-import { CellJMPIFactory } from '../../build/CellJMPI/CellJMPI_CellJMPIFactory';
-import { CellJMPIEscrow } from '../../build/CellJMPI/CellJMPI_CellJMPIEscrow';
+import { Factory } from '../../build/EscrowFactory/EscrowFactory_Factory';
+import { Escrow } from '../../build/EscrowFactory/EscrowFactory_Escrow';
 import { JettonMaster } from '@ton/ton';
 import { keccak256 } from 'js-sha3';
 import * as dotenv from 'dotenv';
@@ -90,7 +90,7 @@ function parseExtraData(extraDataCell: Cell): any {
 }
 
 async function main() {
-    console.log('CellJMPI Factory Testing\n');
+    console.log('EscrowFactory Testing\n');
 
     const FACTORY_ADDRESS = 'EQAaV93zFP0O6AjtjOGVWQvsknR3EfGm6EA3FLh8KE2vH5lm';
     const USDT_MASTER = Address.parse('EQBX6K9aXVl3nXINCyPPL86C4ONVmQ8vK360u6dykFKXpHCa');
@@ -121,7 +121,7 @@ async function main() {
     console.log('Wallet Balance:', (balance / 1000000000n).toString(), 'TON');
 
     const factoryAddress = Address.parse(FACTORY_ADDRESS);
-    const factory = client.open(CellJMPIFactory.fromAddress(factoryAddress));
+    const factory = client.open(Factory.fromAddress(factoryAddress));
 
     const takerAddress = walletAddress;
     const makerAddress = walletAddress;
@@ -278,7 +278,7 @@ async function main() {
         // Check escrow state
         console.log('Checking escrow state...');
         try {
-            const escrow = client.open(CellJMPIEscrow.fromAddress(escrowAddress));
+            const escrow = client.open(Escrow.fromAddress(escrowAddress));
             const isInitialized = await escrow.getIsInitialized();
             console.log('Escrow Initialized:', isInitialized);
 
