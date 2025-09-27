@@ -2,7 +2,7 @@ import { signTypedData } from '@wagmi/core';
 import { config } from '@/components/providers'; // Ensure this is correctly set up
 import { hashTypedData } from 'viem'
 
-const ADDRESSES = {
+export const ADDRESSES = {
     "network": "sepolia",
     "chainId": 11155111,
     "accessToken": "0xfE31A69264fec44007Fece974E005fD3145E62C5",
