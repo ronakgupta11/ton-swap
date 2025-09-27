@@ -38,7 +38,7 @@ export function WalletConnect() {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 z-50">
       {!tonConnected ? (
         <Button
           onClick={() => tonConnectUI.openModal()}
