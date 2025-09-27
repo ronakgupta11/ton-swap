@@ -1,5 +1,5 @@
 import { toNano, Cell } from '@ton/core';
-import { Factory } from '../build/EscrowFactory/EscrowFactory_Factory';
+import { EscrowFactory } from '../build/EscrowFactory/EscrowFactory_EscrowFactory';
 import { NetworkProvider } from '@ton/blueprint';
 import { readFileSync } from 'fs';
 import path from 'path';
@@ -11,7 +11,7 @@ export async function run(provider: NetworkProvider) {
     )[0];
 
     // Deploy factory with owner address and escrow code
-    const factory = provider.open(await Factory.fromInit(provider.sender().address!, escrowCode));
+    const factory = provider.open(await EscrowFactory.fromInit(provider.sender().address!, escrowCode));
 
     await factory.send(
         provider.sender(),

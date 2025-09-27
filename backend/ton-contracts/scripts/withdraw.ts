@@ -1,6 +1,6 @@
 import { Address, beginCell, toNano } from '@ton/core';
 import { Escrow } from '../build/EscrowFactory/EscrowFactory_Escrow';
-import { Factory } from '../build/EscrowFactory/EscrowFactory_Factory';
+import { EscrowFactory } from '../build/EscrowFactory/EscrowFactory_EscrowFactory';
 import { NetworkProvider } from '@ton/blueprint';
 import { keccak256 } from 'js-sha3';
 
@@ -35,7 +35,7 @@ export async function run(provider: NetworkProvider) {
     const escrowAddress = Address.parse(ESCROW_ADDRESS);
     const escrow = provider.open(Escrow.fromAddress(escrowAddress));
     const factoryAddress = Address.parse(FACTORY_ADDRESS);
-    const factory = provider.open(Factory.fromAddress(factoryAddress));
+    const factory = provider.open(EscrowFactory.fromAddress(factoryAddress));
 
     console.log('📋 Withdrawal Setup:');
     console.log(` 🏠 Escrow: ${escrowAddress}`);
@@ -89,7 +89,7 @@ export async function run(provider: NetworkProvider) {
             console.log('\n🕐 Timelock Periods:');
             for (const stage of stages) {
                 try {
-                    const stageTime = await factory.getGetTimeLockStageValue(data.timeLockState, BigInt(stage.id));
+                            const stageTime = await factory.getGetTimeLockStageValue(data.timeLockState, BigInt(stage.id));
                     const timeFromNow = Number(stageTime - currentTime);
                     const isPast = timeFromNow <= 0;
                     const statusEmoji = isPast ? '✅' : '⏳';

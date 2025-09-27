@@ -1,15 +1,26 @@
 {
   "$schema": "https://raw.githubusercontent.com/tact-lang/tact/main/src/config/configSchema.json",
   "projects": [
-    {
-      "name": "EscrowFactory",
-      "path": "contracts/factory.tact",
-      "output": "build/EscrowFactory",
-      "options": {
-          "debug": false,
-          "external": false
-      },
-      "mode": "full"
-  }
+
+  {
+    "name": "Lop",
+    "path": "contracts/Lop.tact",
+    "output": "build/Lop",
+    "options": {
+        "debug": false,
+        "external": false
+    },
+    "mode": "full"
+},
+{
+  "name": "EscrowFactory",
+  "path": "contracts/escrow_factory.tact",
+  "output": "build/EscrowFactory",
+  "options": {
+      "debug": false,
+      "external": false
+  },
+  "mode": "full"
+}
   ]
 }

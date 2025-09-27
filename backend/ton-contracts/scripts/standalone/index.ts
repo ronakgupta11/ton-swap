@@ -1,7 +1,7 @@
 import { Address, beginCell, toNano, Cell, SendMode } from '@ton/core';
 import { TonClient, WalletContractV5R1, internal } from '@ton/ton';
 import { mnemonicToPrivateKey } from '@ton/crypto';
-import { Factory } from '../../build/EscrowFactory/EscrowFactory_Factory';
+import { EscrowFactory } from '../../build/EscrowFactory/EscrowFactory_EscrowFactory';
 import { Escrow } from '../../build/EscrowFactory/EscrowFactory_Escrow';
 import { JettonMaster } from '@ton/ton';
 import { keccak256 } from 'js-sha3';
@@ -121,7 +121,7 @@ async function main() {
     console.log('Wallet Balance:', (balance / 1000000000n).toString(), 'TON');
 
     const factoryAddress = Address.parse(FACTORY_ADDRESS);
-    const factory = client.open(Factory.fromAddress(factoryAddress));
+    const factory = client.open(EscrowFactory.fromAddress(factoryAddress));
 
     const takerAddress = walletAddress;
     const makerAddress = walletAddress;
