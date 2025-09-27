@@ -34,21 +34,32 @@ export function SwapInterface({
     ethTonRatio, 
     isLoading: priceLoading, 
     error: priceError, 
-    refresh: refreshPrices 
-  } = usePythPrices({ refreshInterval: 30000 }) // Refresh every 30 seconds
+    refresh: refreshPrices,
+    lastUpdated
+  } = usePythPrices({ 
+    refreshInterval: 30000, // Refresh every 30 seconds
+    autoStart: true
+  })
 
   // Calculate exchange rate based on selected tokens
   const getExchangeRate = () => {
-    if (fromToken === "eth" && toToken === "ton") {
-      return ethTonRatio || 565 // Fallback to demo rate
-    } else if (fromToken === "ton" && toToken === "eth") {
-      return tonUsd && ethUsd ? ethUsd / tonUsd : 0.0018 // Fallback rate
-    } else if (fromToken === "eth" && toToken === "usdc") {
-      return ethUsd || 3000 // Fallback rate
-    } else if (fromToken === "ton" && toToken === "usdt") {
-      return tonUsd || 2.5 // Fallback rate
+    // Ensure we have valid price data
+    if (!ethUsd || !tonUsd || ethUsd <= 0 || tonUsd <= 0) {
+      // Return fallback rates if no valid price data
+      if (fromToken === "eth" && toToken === "ton") return 565
+      if (fromToken === "ton" && toToken === "eth") return 0.0018
+      return 1
     }
-    return 1 // Default 1:1 for same tokens
+
+    // Calculate rates using live price data
+    // TON/ETH = (TON/USD) / (ETH/USD)
+    if (fromToken === "eth" && toToken === "ton") {
+      return ethUsd / tonUsd // How many TON per 1 ETH
+    } else if (fromToken === "ton" && toToken === "eth") {
+      return tonUsd / ethUsd // How many ETH per 1 TON
+    }
+    
+    return 1 // Default 1:1 for same tokens or unsupported pairs
   }
 
   const handleFromAmountChange = (value: string) => {
@@ -56,10 +67,16 @@ export function SwapInterface({
     onFromAmountChange?.(value)
     
     // Calculate using live prices
-    if (value && !isNaN(Number(value))) {
+    if (value && !isNaN(Number(value)) && Number(value) > 0) {
       const rate = getExchangeRate()
-      const calculatedAmount = (Number(value) * rate).toFixed(2)
-      setToAmount(`~${calculatedAmount}`)
+      if (rate > 0) {
+        const calculatedAmount = (Number(value) * rate).toFixed(6)
+        setToAmount(`~${calculatedAmount}`)
+      } else {
+        setToAmount("~0.00")
+      }
+    } else if (value === "" || value === "0") {
+      setToAmount("~0.00")
     } else {
       setToAmount("~0.00")
     }
@@ -114,6 +131,14 @@ export function SwapInterface({
               <div className="flex items-center space-x-2 text-destructive">
                 <AlertCircle className="w-4 h-4" />
                 <span>Price data unavailable</span>
+                <span className="text-xs text-muted-foreground ml-2">
+                  Using fallback rates
+                </span>
+              </div>
+            ) : priceLoading ? (
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <RefreshCw className="w-4 h-4 animate-spin" />
+                <span>Loading prices...</span>
               </div>
             ) : (
               <div className="flex items-center space-x-4">
@@ -127,9 +152,14 @@ export function SwapInterface({
                     TON: ${tonUsd.toFixed(2)}
                   </span>
                 )}
-                {ethTonRatio > 0 && (
-                  <span className="font-medium">
-                    1 ETH = {ethTonRatio.toFixed(2)} TON
+                {ethUsd > 0 && tonUsd > 0 && (
+                  <span className="font-medium text-green-600">
+                    1 ETH = {(ethUsd / tonUsd).toFixed(4)} TON
+                  </span>
+                )}
+                {lastUpdated && (
+                  <span className="text-xs text-muted-foreground">
+                    Updated {lastUpdated.toLocaleTimeString()}
                   </span>
                 )}
               </div>
@@ -141,6 +171,7 @@ export function SwapInterface({
             onClick={refreshPrices}
             disabled={priceLoading}
             className="h-8 w-8 p-0"
+            title="Refresh prices"
           >
             <RefreshCw className={`w-4 h-4 ${priceLoading ? 'animate-spin' : ''}`} />
           </Button>
@@ -160,10 +191,10 @@ export function SwapInterface({
                     <span>ETH</span>
                   </div>
                 </SelectItem>
-                <SelectItem value="usdc">
+                <SelectItem value="ton">
                   <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 rounded-full bg-blue-600"></div>
-                    <span>USDC</span>
+                    <div className="w-4 h-4 rounded-full bg-blue-400"></div>
+                    <span>TON</span>
                   </div>
                 </SelectItem>
               </SelectContent>
@@ -176,8 +207,8 @@ export function SwapInterface({
             />
           </div>
           <div className="flex justify-between text-sm text-muted-foreground mt-2">
-            <span>Ethereum Network</span>
-            <span>Balance: 2.45 ETH</span>
+            <span>{fromToken === 'eth' ? 'Ethereum Network' : 'TON Network'}</span>
+            <span>Balance: {fromToken === 'eth' ? '2.45 ETH' : '125.50 TON'}</span>
           </div>
         </div>
 
@@ -208,10 +239,10 @@ export function SwapInterface({
                     <span>TON</span>
                   </div>
                 </SelectItem>
-                <SelectItem value="usdt">
+                <SelectItem value="eth">
                   <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 rounded-full bg-green-500"></div>
-                    <span>USDT</span>
+                    <div className="w-4 h-4 rounded-full bg-blue-500"></div>
+                    <span>ETH</span>
                   </div>
                 </SelectItem>
               </SelectContent>
@@ -219,14 +250,14 @@ export function SwapInterface({
             <Input
               placeholder="0.0"
               className="flex-1 text-right text-lg font-medium bg-muted/20"
-              value={priceLoading ? "Loading..." : toAmount}
+              value={priceLoading && !ethUsd && !tonUsd ? "Loading prices..." : toAmount}
               onChange={(e)=>setToAmount(e.target.value)}
               readOnly
             />
           </div>
           <div className="flex justify-between text-sm text-muted-foreground mt-2">
-            <span>TON Network</span>
-            <span>Balance: 125.50 TON</span>
+            <span>{toToken === 'eth' ? 'Ethereum Network' : 'TON Network'}</span>
+            <span>Balance: {toToken === 'eth' ? '2.45 ETH' : '125.50 TON'}</span>
           </div>
         </div>
       </div>
