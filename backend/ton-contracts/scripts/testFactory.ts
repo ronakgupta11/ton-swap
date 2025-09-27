@@ -31,7 +31,7 @@ function createTimeLockStateJS(data: {
 }
 
 export async function run(provider: NetworkProvider) {
-    console.log('🏭 Configuring and testing CellJMPI Factory with Split Cells...\n');
+    console.log('🏭 Configuring and testing Escrow Factory with Split Cells...\n');
 
     const FACTORY_ADDRESS = 'EQDRjTbGKtsUHQi40KnUxPzLjk0EKV544FFAA9nrE8zc_ySv';
     const USDT_MASTER = Address.parse('EQBX6K9aXVl3nXINCyPPL86C4ONVmQ8vK360u6dykFKXpHCa');
