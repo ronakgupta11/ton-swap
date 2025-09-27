@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
+    "@pythnetwork/hermes-client": "^2.0.0",
+    "@pythnetwork/pyth-sdk-solidity": "^4.2.0",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
     "@radix-ui/react-aspect-ratio": "1.1.1",
@@ -54,6 +56,7 @@
     "lucide-react": "^0.454.0",
     "next": "14.2.16",
     "next-themes": "^0.4.6",
+    "pino-pretty": "^13.1.1",
     "react": "^18",
     "react-day-picker": "9.8.0",
     "react-dom": "^18",

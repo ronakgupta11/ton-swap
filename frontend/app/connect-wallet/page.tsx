@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link"
-import { ArrowLeft, Wallet, CheckCircle, ExternalLink, ArrowRight } from "lucide-react"
+import { ArrowLeft, Wallet, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { TonConnectButton, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
+import { useTonWallet } from '@tonconnect/ui-react';
 import { WalletConnect } from '@/components/wallet-connect';
 import { useAccount } from 'wagmi';
 
