@@ -1,6 +1,5 @@
 "use client"
 import { WagmiProvider } from 'wagmi'
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { mainnet } from 'wagmi/chains'
 import '@rainbow-me/rainbowkit/styles.css';
@@ -14,6 +13,7 @@ import {
   arbitrum,
   base,
 } from 'wagmi/chains';
+import {TonConnectUIProvider} from '@tonconnect/ui-react';
 
 const config = getDefaultConfig({
     appName: 'My RainbowKit App',
@@ -26,14 +26,13 @@ const queryClient = new QueryClient()
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <WagmiProvider config={config}>
-        
+      <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <TonConnectUIProvider>
         <RainbowKitProvider>
+        <TonConnectUIProvider manifestUrl="/tonconnect-manifest.json">
         {children}
+    </TonConnectUIProvider>
         </RainbowKitProvider>
-        </TonConnectUIProvider>
       </QueryClientProvider>
     </WagmiProvider>
   )

@@ -1,0 +1,7 @@
+{
+    "url": "http://localhost:3000",                        
+    "name": "SwapAI",                     
+    "iconUrl": "http://localhost:3000/placeholder-logo.png",               
+    "termsOfUseUrl": "http://localhost:3000/terms",     
+    "privacyPolicyUrl": "http://localhost:3000/privacy" 
+  }

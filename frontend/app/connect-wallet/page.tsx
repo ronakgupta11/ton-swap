@@ -1,11 +1,22 @@
+"use client";
+
 import Link from "next/link"
 import { ArrowLeft, Wallet, CheckCircle, ExternalLink, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ConnectButton, TonConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { TonConnectButton, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
+import { WalletConnect } from '@/components/wallet-connect';
+import { useAccount } from 'wagmi';
 
 export default function ConnectWalletPage() {
+  // Get wallet states
+  const tonWallet = useTonWallet();
+  const { isConnected: evmConnected } = useAccount();
+  
+  // Check if both wallets are connected
+  const bothWalletsConnected = !!tonWallet && evmConnected;
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -86,8 +97,10 @@ export default function ConnectWalletPage() {
                     <p className="text-sm text-muted-foreground">Connect TON Wallet or Tonkeeper</p>
                   </div>
                 </div>
-                  <Wallet className="w-4 h-4 mr-2" />
-                  <TonConnectButton />
+                <div className="flex items-center gap-2">
+                  <Wallet className="w-4 h-4" />
+                  <WalletConnect />
+                </div>
               </div>
             </Card>
           </div>
@@ -143,13 +156,18 @@ export default function ConnectWalletPage() {
               <Button
                 size="lg"
                 className="gradient-primary text-primary-foreground hover:opacity-90 transition-opacity glow-primary"
-                disabled
+                disabled={!bothWalletsConnected}
               >
                 Next: Set Swap
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <p className="text-sm text-muted-foreground mt-4">Connect both wallets to continue</p>
+            <p className="text-sm text-muted-foreground mt-4">
+              {bothWalletsConnected 
+                ? "Both wallets connected! You can proceed to set up your swap." 
+                : "Connect both wallets to continue"
+              }
+            </p>
           </div>
 
           {/* Security Notice */}
