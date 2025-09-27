@@ -5,7 +5,7 @@ import { Op } from 'sequelize';
 class MonitorService {
     constructor() {
         this.isRunning = false;
-        this.pollingInterval = 5000; // 5 seconds
+        this.pollingInterval = 500000; // 5 seconds
     }
 
     async start() {

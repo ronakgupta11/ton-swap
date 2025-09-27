@@ -1,0 +1,9 @@
+{
+    "url": "https://ton-swap-seven.vercel.app",
+    "name": "SwapAI",
+    "iconUrl": "https://ton-swap-seven.vercel.app/placeholder-logo.png",
+    "termsOfUseUrl": "https://ton-swap-seven.vercel.app/terms",
+    "privacyPolicyUrl": "https://ton-swap-seven.vercel.app/privacy",
+    "version": "1.0.0",
+    "description": "Cross-chain atomic swap platform with AI optimization"
+}

@@ -105,64 +105,19 @@ export default function ConnectWalletPage() {
             </Card>
           </div>
 
-          {/* Connected State Example */}
-          <div className="space-y-6 mb-8 opacity-50">
-            <Card className="p-6 border-primary/20 bg-primary/5">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold">Ethereum Wallet Connected</h3>
-                    <p className="text-sm text-muted-foreground font-mono">0x1234...5678</p>
-                    <div className="flex items-center space-x-4 mt-2">
-                      <span className="text-sm text-muted-foreground">ETH: 2.45</span>
-                      <span className="text-sm text-muted-foreground">USDC: 1,250.00</span>
-                    </div>
-                  </div>
-                </div>
-                <Button variant="ghost" size="sm">
-                  <ExternalLink className="w-4 h-4" />
-                </Button>
-              </div>
-            </Card>
-
-            <Card className="p-6 border-primary/20 bg-primary/5">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold">TON Wallet Connected</h3>
-                    <p className="text-sm text-muted-foreground font-mono">UQAb...cDef</p>
-                    <div className="flex items-center space-x-4 mt-2">
-                      <span className="text-sm text-muted-foreground">TON: 125.50</span>
-                      <span className="text-sm text-muted-foreground">USDT: 890.25</span>
-                    </div>
-                  </div>
-                </div>
-                <Button variant="ghost" size="sm">
-                  <ExternalLink className="w-4 h-4" />
-                </Button>
-              </div>
-            </Card>
-          </div>
-
           {/* Next Button */}
           <div className="text-center">
             <Link href="/set-swap">
               <Button
                 size="lg"
-                className="gradient-primary text-primary-foreground hover:opacity-90 transition-opacity glow-primary"
+                className={`${bothWalletsConnected?"":"disabled"}bg-white text-black`}
                 disabled={!bothWalletsConnected}
               >
                 Next: Set Swap
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <p className="text-sm text-muted-foreground mt-4">
+            <p className={`text-sm mt-4 ${bothWalletsConnected ? 'text-green-500' : 'text-red-500'}`}>
               {bothWalletsConnected 
                 ? "Both wallets connected! You can proceed to set up your swap." 
                 : "Connect both wallets to continue"

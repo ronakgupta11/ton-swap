@@ -29,7 +29,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-        <TonConnectUIProvider manifestUrl="/tonconnect-manifest.json">
+        <TonConnectUIProvider manifestUrl="https://ton-swap-seven.vercel.app/tonconnect-manifest.json">
         {children}
     </TonConnectUIProvider>
         </RainbowKitProvider>

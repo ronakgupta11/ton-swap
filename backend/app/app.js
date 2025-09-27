@@ -22,13 +22,13 @@ import { syncDatabase } from './models/index.js';
 dotenv.config();
 
 // Ensure environment variables are loaded
-if (!process.env.DB_DATABASE || !process.env.DB_USER || !process.env.DB_PASSWORD) {
-  throw new Error('Database configuration is missing in environment variables');
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL is missing in environment variables');
 }
 
 // Ensure the PORT is set
 if (!process.env.PORT) {
-  process.env.PORT = 3000; // Default port if not set
+  process.env.PORT = 8000; // Default port if not set
 }
 
 // Create an Express application
@@ -37,7 +37,7 @@ const server = http.createServer(app);
 
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3001', // Allow requests from this origin
+  origin: 'http://localhost:8000', // Allow requests from this origin
 }));
 
 // Initialize WebSocket
@@ -61,7 +61,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: 'http://localhost:8000',
       },
     ],
   },
@@ -83,7 +83,7 @@ app.get('/health', (req, res) => {
 });
 
 // --- Start the server ---
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 server.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`API Documentation available at http://localhost:${PORT}/api-docs`);
