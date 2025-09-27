@@ -15,7 +15,7 @@ import {
 } from 'wagmi/chains';
 import {TonConnectUIProvider} from '@tonconnect/ui-react';
 
-const config = getDefaultConfig({
+export const config = getDefaultConfig({
     appName: 'My RainbowKit App',
     projectId: 'YOUR_PROJECT_ID',
     chains: [mainnet, polygon, optimism, arbitrum, base],
