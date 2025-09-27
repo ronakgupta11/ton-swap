@@ -26,6 +26,7 @@ async function main() {
         },
         null,
     );
+    
 
     expect(deployResult.transactions).toHaveTransaction({
         from: deployer.address,

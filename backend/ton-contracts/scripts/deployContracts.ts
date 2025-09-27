@@ -30,7 +30,7 @@ export async function run(provider: NetworkProvider) {
         },
         null,
     );
-
+    await provider.waitForDeploy(lop.address);
     console.log('✅ LOP deployed at:', lop.address);
 
     // Deploy EscrowFactory
@@ -44,7 +44,7 @@ export async function run(provider: NetworkProvider) {
         },
         null,
     );
-
+    await provider.waitForDeploy(factory.address);
     console.log('✅ EscrowFactory deployed at:', factory.address);
 
     // Set factory address in LOP
@@ -60,7 +60,7 @@ export async function run(provider: NetworkProvider) {
         }
     );
     console.log('✅ LOP factory address set');
-
+    await provider.waitForDeploy(factory.address);
     // Set LOP address in factory
     await factory.send(
         deployer,
@@ -73,7 +73,7 @@ export async function run(provider: NetworkProvider) {
         }
     );
     console.log('✅ Factory LOP address set');
-
+    await provider.waitForDeploy(factory.address);
     // Verify deployment
     console.log('\n🔍 Verifying deployment...');
     let lopOwner = await lop.getGetOwner();
