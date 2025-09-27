@@ -1,5 +1,5 @@
 import { Address, beginCell, toNano, Cell } from '@ton/core';
-import { Factory } from '../build/EscrowFactory/EscrowFactory_Factory';
+import { EscrowFactory } from '../build/EscrowFactory/EscrowFactory_EscrowFactory';
 import { NetworkProvider } from '@ton/blueprint';
 
 // Timelock constants (matching Tact code)
@@ -79,7 +79,7 @@ export async function run(provider: NetworkProvider) {
 
     const FACTORY_ADDRESS = 'EQAwLMl-QA-X13xQTHI8ldFzLWH_ljMdBZNCa1MF5xHNCeYn';
     const factoryAddress = Address.parse(FACTORY_ADDRESS);
-    const factory = provider.open(Factory.fromAddress(factoryAddress));
+    const factory = provider.open(EscrowFactory.fromAddress(factoryAddress));
 
     console.log('📋 Factory Setup:');
     console.log(` 🏭 Factory: ${factoryAddress}`);
@@ -124,6 +124,7 @@ export async function run(provider: NetworkProvider) {
         const contractStateWithDeployedAt = await factory.getSetDeployedAtInTimeLockState(
             jsTimeLockState,
             testDeployedAt,
+                { $$type: 'SetDeployedAtInTimeLockState', deployedAt: testDeployedAt }
         );
         const jsStateWithDeployedAt = setDeployedAtJS(jsTimeLockState, testDeployedAt);
 

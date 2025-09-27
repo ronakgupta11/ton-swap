@@ -1,5 +1,5 @@
 import { Address, beginCell, toNano, Cell } from '@ton/core';
-import { Factory } from '../build/EscrowFactory/EscrowFactory_Factory';
+import { EscrowFactory } from '../build/EscrowFactory/EscrowFactory_EscrowFactory';
 import { Escrow } from '../build/EscrowFactory/EscrowFactory_Escrow';
 import { NetworkProvider } from '@ton/blueprint';
 import { JettonMaster } from '@ton/ton';
@@ -38,7 +38,7 @@ export async function run(provider: NetworkProvider) {
     const USDT_AMOUNT = 1;
 
     const factoryAddress = Address.parse(FACTORY_ADDRESS);
-    const factory = provider.open(Factory.fromAddress(factoryAddress));
+    const factory = provider.open(EscrowFactory.fromAddress(factoryAddress));
 
     console.log('📋 Factory Setup:');
     console.log(` 🏭 Factory: ${factoryAddress}`);
