@@ -1,4 +1,9 @@
 // import { createOrderHash, signOrder } from "./ethUtils";
+// import { config } from "@/components/providers";
+// import { writeContract, readContract, waitForTransactionReceipt } from "@wagmi/core";
+// import { ADDRESSES } from "@/lib/ethUtils";
+// import LimitOrderProtocolABI from "@/utils/LimitOrderProtocol.json";
+
 // type EvmToTonOrderParams = {
 //   makerSrcAddress: string;
 //   fromToken: string;
@@ -11,7 +16,11 @@
 //   expiresAt: Date;
 // };
 
-// async function handleEvmToTonOrder({
+// type TonToEvmOrderParams = {
+
+// }
+
+// export async function handleEvmToTonOrder({
 //   makerSrcAddress,
 //   fromToken,
 //   toToken,
@@ -111,3 +120,5 @@
 //   }
 //   return { signature, orderHash };
 // }
+
+
