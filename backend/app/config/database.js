@@ -6,13 +6,14 @@ dotenv.config();
 // Initialize Sequelize with Neon database connection
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
+  
   dialectOptions: {
     ssl: {
       require: true,
       rejectUnauthorized: false
     }
   },
-  logging: console.log, // Set to false in production
+  logging: true, // Set to false in production
   pool: {
     max: 5,
     min: 0,
