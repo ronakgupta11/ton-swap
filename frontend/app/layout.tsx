@@ -7,9 +7,9 @@ import './globals.css'
 
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Ultron Swap - AI-Powered Cross-Chain Swaps',
+  description: 'Execute smart, secure, and oracle-verified cross-chain swaps, powered by AI TWAP planning.',
+  generator: 'Next.js',
 }
 
 export default function RootLayout({

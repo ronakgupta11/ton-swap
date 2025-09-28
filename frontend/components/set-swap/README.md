@@ -5,7 +5,7 @@ This directory contains the modular components for the swap configuration page, 
 ## Components
 
 ### NavigationHeader
-- Handles the top navigation bar with back button and SwapAI logo
+- Handles the top navigation bar with back button and Ultron Swap logo
 - Self-contained navigation component
 
 ### ProgressSteps

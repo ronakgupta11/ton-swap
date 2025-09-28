@@ -269,8 +269,9 @@ export function SwapInterface({
         {onCreateOrder && (
           <div className="mt-6 z-100">
             <Button
+              variant="outline"
               size="lg"
-              className="w-full bg-white z-100 gradient-primary text-primary-foreground hover:opacity-90 transition-opacity glow-primary"
+              className="w-full  z-100 gradient-primary text-white opacity-90 transition-opacity glow-primary"
               onClick={onCreateOrder}
             >
               Create Order

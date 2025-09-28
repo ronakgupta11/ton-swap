@@ -31,7 +31,7 @@ export default function ConnectWalletPage() {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <Wallet className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-foreground">SwapAI</span>
+              <span className="text-xl font-bold text-foreground">Ultron Swap</span>
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function ConnectWalletPage() {
               <div>
                 <h4 className="text-sm font-medium mb-1">Security Notice</h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  SwapAI never stores your private keys. All transactions are signed locally in your wallet. We only
+                  Ultron Swap never stores your private keys. All transactions are signed locally in your wallet. We only
                   request permission to view your wallet addresses and token balances.
                 </p>
               </div>
