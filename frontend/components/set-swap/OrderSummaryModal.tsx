@@ -23,6 +23,7 @@ interface OrderSummaryModalProps {
   duration: number
   slices: number
   slippage: number
+  orderResult?: any
 }
 
 export function OrderSummaryModal({
@@ -35,7 +36,8 @@ export function OrderSummaryModal({
   toToken,
   duration,
   slices,
-  slippage
+  slippage,
+  orderResult
 }: OrderSummaryModalProps) {
   const sliceAmount = fromAmount ? (Number(fromAmount) / slices).toFixed(2) : "0.00"
   const sliceInterval = duration / slices
@@ -110,6 +112,38 @@ export function OrderSummaryModal({
               </div>
             </div>
           </Card>
+
+          {/* Order Details */}
+          {orderResult && (
+            <Card className="p-4">
+              <h4 className="font-medium mb-3 flex items-center gap-2">
+                <CheckCircle className="w-4 h-4" />
+                Order Details
+              </h4>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Order ID:</span>
+                  <span className="font-mono text-xs">{orderResult.orderId}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Order Hash:</span>
+                  <span className="font-mono text-xs">{orderResult.orderHash?.slice(0, 10)}...</span>
+                </div>
+                {orderResult.txHash && (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Transaction:</span>
+                    <span className="font-mono text-xs">{orderResult.txHash?.slice(0, 10)}...</span>
+                  </div>
+                )}
+                {orderResult.makerPublicKey && (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Public Key:</span>
+                    <span className="font-mono text-xs">{orderResult.makerPublicKey?.slice(0, 10)}...</span>
+                  </div>
+                )}
+              </div>
+            </Card>
+          )}
         </div>
 
         <DialogFooter className="gap-2">

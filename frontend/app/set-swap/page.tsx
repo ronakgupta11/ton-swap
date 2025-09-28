@@ -22,6 +22,7 @@ export default function SetSwapPage() {
   const [duration, setDuration] = useState(30);
   const [slices, setSlices] = useState(6);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [orderResult, setOrderResult] = useState<any>(null);
 
   const handleFromAmountChange = (amount: string) => {
     setFromAmount(amount);
@@ -45,12 +46,14 @@ export default function SetSwapPage() {
     setToAmount(`~${tempAmount}`);
   };
 
-  const handleCreateOrder = () => {
+  const handleCreateOrder = (orderResult: any) => {
+    console.log("Order created successfully:", orderResult);
     setIsOrderModalOpen(true);
+    // Store the order result for the modal
+    setOrderResult(orderResult);
   };
 
   const handleConfirmOrder = () => {
-    // TODO: Implement order creation logic
     console.log("Order confirmed:", {
       fromAmount,
       toAmount,
@@ -59,6 +62,7 @@ export default function SetSwapPage() {
       duration,
       slices,
       slippage,
+      orderResult
     });
     setIsOrderModalOpen(false);
     // You can add success notification here
@@ -131,6 +135,7 @@ export default function SetSwapPage() {
             duration={duration}
             slices={slices}
             slippage={slippage}
+            orderResult={orderResult}
           />
         </div>
       </div>

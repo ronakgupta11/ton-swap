@@ -1,7 +1,7 @@
 "use client"
 import { WagmiProvider } from 'wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { mainnet } from 'wagmi/chains'
+import { mainnet, sepolia } from 'wagmi/chains'
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultConfig,
@@ -18,7 +18,7 @@ import {TonConnectUIProvider} from '@tonconnect/ui-react';
 export const config = getDefaultConfig({
     appName: 'My RainbowKit App',
     projectId: 'YOUR_PROJECT_ID',
-    chains: [mainnet, polygon, optimism, arbitrum, base],
+    chains: [mainnet, polygon, optimism, arbitrum, base,sepolia],
     ssr: true, // If your dApp uses server side rendering (SSR)
   });
 
